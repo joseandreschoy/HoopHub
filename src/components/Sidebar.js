@@ -1,46 +1,34 @@
 import React from "react";
-import { Box, Text, Link, Divider } from "@nextui-org/react";
+import { Text, Link, Divider, Avatar } from "@nextui-org/react";
 
 const Sidebar = () => {
   return (
-    <Box>
-      <Text weight="bold" marginBottom="2">
+    <div>
+      <Text h4 weight="bold" marginBottom="2">
         Trends
       </Text>
-      <Link href="/trends/1" underline>
+      <Link href="/trends/1" color underline>
         #HoopHub
       </Link>
       <Divider marginTop="2" marginBottom="4" />
-      <Text weight="bold" marginBottom="2">
+      <Text h4 weight="bold" marginBottom="2">
         Who to follow
       </Text>
-      <Box display="flex" alignItems="center" marginBottom="2">
-        <Box marginRight="2">
-          <img
-            src="/avatar.png"
-            alt="User Avatar"
-            style={{ borderRadius: "50%" }}
-          />
-        </Box>
-        <Box>
+      <div style={{ display: "flex", alignItems: "center", marginBottom: "2" }}>
+        <Avatar size="medium" src="/avatar.png" alt="User Avatar" />
+        <div style={{ marginLeft: "1rem" }}>
           <Text weight="bold">John Doe</Text>
           <Text color="secondary">@johndoe</Text>
-        </Box>
-      </Box>
-      <Box display="flex" alignItems="center">
-        <Box marginRight="2">
-          <img
-            src="/avatar.png"
-            alt="User Avatar"
-            style={{ borderRadius: "50%" }}
-          />
-        </Box>
-        <Box>
+        </div>
+      </div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Avatar size="medium" src="/avatar.png" alt="User Avatar" />
+        <div style={{ marginLeft: "1rem" }}>
           <Text weight="bold">Jane Smith</Text>
           <Text color="secondary">@janesmith</Text>
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

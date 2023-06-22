@@ -1,14 +1,12 @@
-// pages/Homepage.js
 import React from "react";
-import { Container, Box, Button } from "@nextui-org/react";
+import { Container, Button } from "@nextui-org/react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import TweetList from "../components/PostList";
+import PostList from "../components/PostList";
 import Sidebar from "../components/Sidebar";
 
-const Homepage = () => {
-  // Sample data for tweets
-  const tweets = [
+const HomePage = () => {
+  const posts = [
     {
       id: 1,
       username: "john_doe",
@@ -27,23 +25,23 @@ const Homepage = () => {
     <>
       <Header />
       <Container>
-        <Box display="flex" justifyContent="space-between">
-          <Box width="70%" paddingRight="4">
-            <Box marginBottom="4">
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ width: "70%", paddingRight: "1rem" }}>
+            <div style={{ marginBottom: "1rem" }}>
               <Button color="error" shadow>
                 Create Tweet
               </Button>
-            </Box>
-            <PostList tweets={tweets} />
-          </Box>
-          <Box width="30%">
+            </div>
+            <PostList posts={posts} />
+          </div>
+          <div style={{ width: "30%" }}>
             <Sidebar />
-          </Box>
-        </Box>
+          </div>
+        </div>
       </Container>
       <Footer />
     </>
   );
 };
 
-export default Homepage;
+export default HomePage;

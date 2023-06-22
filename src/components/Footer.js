@@ -1,13 +1,26 @@
 import React from "react";
-import { Box, Container, Link, Text } from "@nextui-org/react";
+import { Container, Link, Text } from "@nextui-org/react";
 
 const Footer = () => {
   return (
-    <Box backgroundColor="dark" color="white" paddingY="2" marginTop="4">
+    <div
+      style={{
+        backgroundColor: "dark",
+        color: "white",
+        padding: "16px 0",
+        marginTop: "32px",
+      }}
+    >
       <Container>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Text>&copy; 2023 HoopHub. All rights reserved.</Text>
-          <Box display="flex">
+          <div style={{ display: "flex" }}>
             <Link href="/terms" color="inherit" underline>
               Terms
             </Link>
@@ -19,10 +32,10 @@ const Footer = () => {
             <Link href="/contact" color="inherit" underline>
               Contact
             </Link>
-          </Box>
-        </Box>
+          </div>
+        </div>
       </Container>
-    </Box>
+    </div>
   );
 };
 

@@ -1,43 +1,44 @@
 import React from "react";
-import { Box, Container, Link, Image, Spacer } from "@nextui-org/react";
+import { Link, Image } from "@nextui-org/react";
 
 const Header = () => {
   return (
-    <Box backgroundColor="primary" color="white" paddingY="2" marginBottom="4">
-      <Container>
-        <Box display="flex" alignItems="center">
-          <Link href="/">
-            <Image
-              src="/hoophub-logo.png"
-              alt="HoopHub Logo"
-              height={30}
-              width={30}
-            />
-          </Link>
-          <Spacer inline x={0.5} />
+    <div
+      style={{
+        backgroundColor: "#1976D2",
+        color: "white",
+        padding: "1rem",
+        marginBottom: "2rem",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Link href="/">
+          <Image
+            src="/hoophub-logo.png"
+            alt="HoopHub Logo"
+            height={30}
+            width={30}
+          />
+        </Link>
+        <div style={{ marginLeft: "1rem" }}>
           <Link href="/" color="inherit" underline>
             Home
           </Link>
-          <Spacer inline x={0.5} />
           <Link href="/explore" color="inherit" underline>
             Explore
           </Link>
-          <Spacer inline x={0.5} />
           <Link href="/notifications" color="inherit" underline>
             Notifications
           </Link>
-          <Spacer inline x={0.5} />
           <Link href="/messages" color="inherit" underline>
             Messages
           </Link>
-          <Spacer inline x={0.5} />
           <Link href="/profile" color="inherit" underline>
             Profile
           </Link>
-          <Spacer inline x={0.5} />
-        </Box>
-      </Container>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

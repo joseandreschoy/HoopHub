@@ -1,10 +1,13 @@
 import React from "react";
-import { Box } from "@nextui-org/react";
 import Tweet from "./Tweet";
 
-const TweetList = ({ tweets }) => {
+const PostList = ({ tweets }) => {
+  if (!tweets || tweets.length === 0) {
+    return <div>No tweets to display</div>;
+  }
+
   return (
-    <Box>
+    <div>
       {tweets.map((tweet) => (
         <Tweet
           key={tweet.id}
@@ -13,8 +16,8 @@ const TweetList = ({ tweets }) => {
           text={tweet.text}
         />
       ))}
-    </Box>
+    </div>
   );
 };
 
-export default TweetList;
+export default PostList;
