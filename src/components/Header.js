@@ -1,42 +1,106 @@
 import React from "react";
-import { Link, Image } from "@nextui-org/react";
+import { Link, Image, Text, Button } from "@nextui-org/react";
+import Logo from "../assets/hoophubimage.png";
 
 const Header = () => {
   return (
     <div
       style={{
-        backgroundColor: "#1976D2",
+        backgroundColor: "orange",
         color: "white",
         padding: "1rem",
         marginBottom: "2rem",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }}>
         <Link href="/">
-          <Image
-            src="/hoophub-logo.png"
-            alt="HoopHub Logo"
-            height={30}
-            width={30}
-          />
+          <Image src={Logo} alt="HoopHub Logo" height={50} width={50} />
         </Link>
-        <div style={{ marginLeft: "1rem" }}>
-          <Link href="/" color="inherit" underline>
-            Home
+      </div>
+      <div style={{ display: "flex", gap: "0.5rem" }}>
+        <Button
+          color="white"
+          auto
+          style={{
+            border: "2px solid white",
+            borderRadius: "4px",
+            backgroundColor: "transparent",
+          }}
+          bordered
+        >
+          <Link href="/" color="inherit">
+            <Text size="1rem" color="white" weight="bold">
+              Home
+            </Text>
           </Link>
-          <Link href="/explore" color="inherit" underline>
-            Explore
+        </Button>
+        <Button
+          color="white"
+          auto
+          style={{
+            border: "2px solid white",
+            borderRadius: "4px",
+            backgroundColor: "transparent",
+          }}
+          bordered
+        >
+          <Link href="/explore" color="inherit">
+            <Text size="1rem" color="white" weight="bold">
+              Explore
+            </Text>
           </Link>
-          <Link href="/notifications" color="inherit" underline>
-            Notifications
+        </Button>
+        <Button
+          color="white"
+          auto
+          style={{
+            border: "2px solid white",
+            borderRadius: "4px",
+            backgroundColor: "transparent",
+          }}
+          bordered
+        >
+          <Link href="/notifications" color="inherit">
+            <Text size="1rem" color="white" weight="bold">
+              Notifications
+            </Text>
           </Link>
-          <Link href="/messages" color="inherit" underline>
-            Messages
+        </Button>
+        <Button
+          color="white"
+          auto
+          style={{
+            border: "2px solid white",
+            borderRadius: "4px",
+            backgroundColor: "transparent",
+          }}
+          bordered
+        >
+          <Link href="/messages" color="inherit">
+            <Text size="1rem" color="white" weight="bold">
+              Messages
+            </Text>
           </Link>
-          <Link href="/profile" color="inherit" underline>
-            Profile
+        </Button>
+        <Button
+          color="white"
+          auto
+          style={{
+            border: "2px solid white",
+            borderRadius: "4px",
+            backgroundColor: "transparent",
+          }}
+          bordered
+        >
+          <Link href="/profile" color="inherit">
+            <Text size="1rem" color="white" weight="bold">
+              Profile
+            </Text>
           </Link>
-        </div>
+        </Button>
       </div>
     </div>
   );
