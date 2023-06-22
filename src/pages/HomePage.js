@@ -86,7 +86,7 @@ const HomePage = () => {
             placeholder="Enter your tweet..."
             onChange={(e) => setTweetContent(e.target.value)}
             fullWidth
-            onKeyPress={handleKeyPress} // Handle Enter key press
+            onPress={handleKeyPress}
           />
         </Modal>
       )}
