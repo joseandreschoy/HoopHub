@@ -13,7 +13,7 @@ const PostList = ({ tweets }) => {
           key={tweet.id}
           username={tweet.username}
           displayName={tweet.displayName}
-          text={tweet.text}
+          text={tweet.content}
         />
       ))}
     </div>

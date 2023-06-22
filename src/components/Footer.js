@@ -8,28 +8,41 @@ const Footer = () => {
         backgroundColor: "dark",
         color: "white",
         padding: "16px 0",
-        marginTop: "32px",
+        position: "fixed",
+        bottom: 0,
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        fontFamily: "Arial, sans-serif",
       }}
     >
       <Container>
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Text>&copy; 2023 HoopHub. All rights reserved.</Text>
-          <div style={{ display: "flex" }}>
-            <Link href="/terms" color="inherit" underline>
+          <Text color="black">&copy; 2023 HoopHub. All rights reserved.</Text>
+          <div style={{ marginLeft: "10px" }}>
+            <Link
+              href="/terms"
+              color="black"
+              underline
+              style={{ paddingRight: "10px" }}
+            >
               Terms
             </Link>
-            <Text marginX="1">|</Text>
-            <Link href="/privacy" color="inherit" underline>
+            <Link
+              href="/privacy"
+              color="black"
+              underline
+              style={{ paddingRight: "10px" }}
+            >
               Privacy
             </Link>
-            <Text marginX="1">|</Text>
-            <Link href="/contact" color="inherit" underline>
+            <Link href="/contact" color="black" underline>
               Contact
             </Link>
           </div>
