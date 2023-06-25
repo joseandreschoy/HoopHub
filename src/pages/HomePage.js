@@ -17,7 +17,9 @@ const HomePage = () => {
 
   const fetchTweets = async () => {
     try {
-      const response = await axios.get("/api/tweets");
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/tweets`
+      );
       setTweets(response.data);
     } catch (error) {
       console.error(error);
@@ -26,9 +28,12 @@ const HomePage = () => {
 
   const createTweet = async () => {
     try {
-      const response = await axios.post("/api/tweets", {
-        content: tweetContent,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/tweets`,
+        {
+          content: tweetContent,
+        }
+      );
       const newTweet = response.data;
       setTweets((prevTweets) => [newTweet, ...prevTweets]);
       setTweetContent("");
