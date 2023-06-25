@@ -101,6 +101,22 @@ const Header = () => {
             </Text>
           </Link>
         </Button>
+        <Button
+          color="white"
+          auto
+          style={{
+            border: "2px solid white",
+            borderRadius: "4px",
+            backgroundColor: "transparent",
+          }}
+          bordered
+        >
+          <Link href="/login" color="inherit">
+            <Text size="1rem" color="white" weight="bold">
+              Login
+            </Text>
+          </Link>
+        </Button>
       </div>
     </div>
   );

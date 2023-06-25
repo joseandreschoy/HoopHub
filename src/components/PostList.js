@@ -11,7 +11,7 @@ const PostList = ({ tweets }) => {
       {tweets.map((tweet) => (
         <Tweet
           key={tweet.id}
-          username={tweet.username}
+          username={tweet.user_id}
           displayName={tweet.displayName}
           text={tweet.content}
         />
