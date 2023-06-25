@@ -6,33 +6,60 @@ import Header from "../components/Header";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [isRegistering, setIsRegistering] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isRegistering, setIsRegistering] = useState(false);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (isRegistering) {
-      // Handle registration
       try {
-        await axios.post("/api/register", { username, email, password });
-        // Registration successful
-        navigate("/login"); // Redirect to login page
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {
+          username,
+          email,
+          password,
+        });
+
+        // Registration successful, log in the user
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/login`,
+          {
+            email,
+            password,
+          }
+        );
+
+        const token = response.data.token;
+
+        // Store the authentication token securely (e.g., in a browser cookie or local storage)
+        localStorage.setItem("authToken", token);
+
+        // Redirect to the homepage or any other protected route
+        navigate("/");
       } catch (error) {
         console.error("Error registering:", error);
-        // Handle registration error, show an error message
       }
     } else {
-      // Handle login
       try {
-        await axios.post("/api/login", { username, password });
-        // Login successful
-        navigate("/"); // Redirect to homepage
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/login`,
+          {
+            email,
+            password,
+          }
+        );
+
+        const token = response.data.token;
+
+        // Store the authentication token securely (e.g., in a browser cookie or local storage)
+        localStorage.setItem("authToken", token);
+
+        // Redirect to the homepage or any other protected route
+        navigate("/");
       } catch (error) {
         console.error("Error logging in:", error);
-        // Handle login error, show an error message
       }
     }
   };
@@ -52,7 +79,9 @@ const LoginPage = () => {
             h2
             weight="bold"
             marginBottom="2rem"
-            style={{ fontFamily: "Your Font Name" }} // Replace with your desired font
+            style={{
+              fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+            }}
           >
             {isRegistering ? "Register" : "Login"}
           </Text>
@@ -90,10 +119,12 @@ const LoginPage = () => {
               />
             </div>
             <Button
-              color="orange"
-              auto
               type="submit"
-              style={{ width: "100%", marginBottom: "1rem" }}
+              style={{
+                width: "100%",
+                marginBottom: "1rem",
+                backgroundColor: "orange",
+              }}
               font="body"
             >
               <Text color="white" weight="bold">
@@ -101,7 +132,12 @@ const LoginPage = () => {
               </Text>
             </Button>
           </form>
-          <Text font="body">
+          <Text
+            font="body"
+            style={{
+              fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+            }}
+          >
             {isRegistering
               ? "Already have an account?"
               : "Don't have an account yet?"}{" "}

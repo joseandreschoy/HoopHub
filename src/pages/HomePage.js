@@ -55,17 +55,16 @@ const HomePage = () => {
       <Container>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ width: "70%", paddingRight: "1rem" }}>
-            <div style={{ marginBottom: "1rem" }}>
-              <Button color="error" shadow onClick={() => setShowModal(true)}>
-                POST !
-              </Button>
-            </div>
+            <div style={{ marginBottom: "1rem" }}></div>
             <PostList tweets={tweets} />
           </div>
           <div style={{ width: "30%" }}>
             <Sidebar />
           </div>
         </div>
+        <Button color="error" shadow onClick={() => setShowModal(true)}>
+          POST !
+        </Button>
       </Container>
       <Footer />
 

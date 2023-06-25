@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Text, Link, Divider, Avatar } from "@nextui-org/react";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 
 const sidebarStyles = {
   container: {
     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-    border: "0.125rem solid #FF6B01", // Orange border color
-    padding: "1.5rem", // Adjust padding as needed
-    width: "18rem", // Adjust the width as desired
+    border: "0.125rem solid orange",
+    padding: "1.5rem",
+    width: "18rem",
+    borderRadius: "1rem",
   },
   trendTitle: {
     marginBottom: "1.5rem",
@@ -37,18 +38,33 @@ const sidebarStyles = {
 };
 
 const Sidebar = () => {
+  const [trends, setTrends] = useState([]);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    const fetchTrends = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/trends`
+        );
+        setTrends(response.data);
+      } catch (error) {
+        console.error("Error fetching trends:", error);
+      }
+    };
+
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("/api/users");
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/users`
+        );
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
 
+    fetchTrends();
     fetchUsers();
   }, []);
 
@@ -57,9 +73,15 @@ const Sidebar = () => {
       <Text h4 style={sidebarStyles.trendTitle} weight="bold">
         Trends
       </Text>
-      <Link href="/trends/1" style={sidebarStyles.trendLink}>
-        #HoopHub
-      </Link>
+      {trends.map((trend) => (
+        <Link
+          key={trend.id}
+          href={`/trends/${trend.id}`}
+          style={sidebarStyles.trendLink}
+        >
+          #{trend.name}
+        </Link>
+      ))}
       <Divider style={sidebarStyles.divider} />
       <Text h4 style={sidebarStyles.whoToFollowTitle} weight="bold">
         Who to follow
@@ -73,7 +95,7 @@ const Sidebar = () => {
             style={sidebarStyles.avatar}
           />
           <div>
-            <Text weight="bold">{user.name}</Text>
+            <Text weight="bold">{user.username}</Text>
             <Text color="secondary">@{user.username}</Text>
           </div>
         </div>
