@@ -52,7 +52,7 @@ const HomePage = () => {
           <div style={{ width: "70%", paddingRight: "1rem" }}>
             <div style={{ marginBottom: "1rem" }}>
               <Button color="error" shadow onClick={() => setShowModal(true)}>
-                Create Tweet
+                POST !
               </Button>
             </div>
             <PostList tweets={tweets} />
@@ -83,7 +83,7 @@ const HomePage = () => {
         >
           <Input
             value={tweetContent}
-            placeholder="Enter your tweet..."
+            placeholder="Enter your baller talk..."
             onChange={(e) => setTweetContent(e.target.value)}
             fullWidth
             onPress={handleKeyPress}
