@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PostList from "../components/PostList";
 import Sidebar from "../components/Sidebar";
+import NBAFixtures from "../components/NBAFixtures"; // Importing the NBAFixtures component
 import axios from "axios";
 
 const HomePage = () => {
@@ -53,17 +54,30 @@ const HomePage = () => {
     <>
       <Header />
       <Container>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ width: "70%", paddingRight: "1rem" }}>
-            <div style={{ marginBottom: "1rem" }}></div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "1rem",
+          }}
+        >
+          <div style={{ flex: "0 0 30%" }}>
+            <NBAFixtures />
+          </div>
+          <div style={{ flex: "0 0 50%" }}>
             <PostList tweets={tweets} />
           </div>
-          <div style={{ width: "30%" }}>
+          <div style={{ flex: "0 0 20%" }}>
             <Sidebar />
           </div>
         </div>
-        <Button color="error" shadow onClick={() => setShowModal(true)}>
-          POST !
+        <Button
+          color="error"
+          shadow
+          onClick={() => setShowModal(true)}
+          fullWidth
+        >
+          POST!
         </Button>
       </Container>
       <Footer />

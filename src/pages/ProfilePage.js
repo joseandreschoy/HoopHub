@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Container, Text, styled } from "@nextui-org/react";
+import { useParams } from "react-router-dom";
+import { Text, styled } from "@nextui-org/react";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -23,7 +24,7 @@ const CustomTabList = styled(TabList, {
   marginTop: "1.25rem",
   listStyle: "none",
   padding: "0",
-  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", // Add font family here
+  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
 });
 
 const CustomTab = styled(Tab, {
@@ -51,6 +52,7 @@ const CustomTabPanel = styled(TabPanel, {
 });
 
 const ProfilePage = () => {
+  const { id } = useParams();
   const [user, setUser] = useState(null);
   const [tweets, setTweets] = useState([]);
   const [comments, setComments] = useState([]);
@@ -59,7 +61,7 @@ const ProfilePage = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/users/1`
+          `${process.env.REACT_APP_API_URL}/api/users/${id}`
         );
         setUser(response.data);
       } catch (error) {
@@ -70,7 +72,7 @@ const ProfilePage = () => {
     const fetchTweets = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/tweets`
+          `${process.env.REACT_APP_API_URL}/api/tweets?userId=${id}`
         );
         setTweets(response.data);
       } catch (error) {
@@ -81,7 +83,7 @@ const ProfilePage = () => {
     const fetchComments = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/comments`
+          `${process.env.REACT_APP_API_URL}/api/comments?userId=${id}`
         );
         setComments(response.data);
       } catch (error) {
@@ -92,65 +94,60 @@ const ProfilePage = () => {
     fetchUserProfile();
     fetchTweets();
     fetchComments();
-  }, []);
+  }, [id]);
 
   return (
     <>
       <Header />
-      <Container>
-        <div style={{ marginTop: "2.5rem" }}>
-          <CustomText h1>Profile</CustomText>
-          <div style={{ display: "flex" }}>
-            <div style={{ flex: 1 }}>
-              {user && (
-                <>
-                  <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
-                    <CustomText weight="bold">Username:</CustomText>
-                    <CustomText>{user.username}</CustomText>
-                  </div>
-                  <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
-                    <CustomText weight="bold">Display Name:</CustomText>
-                    <CustomText>{user.display_name}</CustomText>
-                  </div>
-                  <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
-                    <CustomText weight="bold">Bio:</CustomText>
-                    <CustomText>{user.bio}</CustomText>
-                  </div>
-                </>
-              )}
-              <Tabs>
-                <CustomTabList>
-                  <CustomTab>Tweets</CustomTab>
-                  <CustomTab>Comments</CustomTab>
-                </CustomTabList>
-                <CustomTabPanel>
-                  {tweets.map((tweet) => (
-                    <Tweet
-                      key={tweet.id}
-                      username={tweet.username}
-                      displayName={tweet.display_name}
-                      text={tweet.text}
-                    />
-                  ))}
-                </CustomTabPanel>
-                <CustomTabPanel>
-                  {comments.map((comment) => (
-                    <Tweet
-                      key={comment.id}
-                      username={comment.username}
-                      displayName={comment.display_name}
-                      text={comment.text}
-                    />
-                  ))}
-                </CustomTabPanel>
-              </Tabs>
-            </div>
-            <div style={{ marginLeft: "2rem" }}>
-              <Sidebar />
-            </div>
-          </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ maxWidth: "600px", width: "100%" }}>
+          {user && (
+            <>
+              <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
+                <CustomText weight="bold">Username:</CustomText>
+                <CustomText>{user.username}</CustomText>
+              </div>
+              <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
+                <CustomText weight="bold">Display Name:</CustomText>
+                <CustomText>{user.display_name}</CustomText>
+              </div>
+              <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
+                <CustomText weight="bold">Bio:</CustomText>
+                <CustomText>{user.bio}</CustomText>
+              </div>
+            </>
+          )}
+          <Tabs>
+            <CustomTabList>
+              <CustomTab>Tweets</CustomTab>
+              <CustomTab>Comments</CustomTab>
+            </CustomTabList>
+            <CustomTabPanel>
+              {tweets.map((tweet) => (
+                <Tweet
+                  key={tweet.id}
+                  username={tweet.username}
+                  displayName={tweet.display_name}
+                  text={tweet.content}
+                />
+              ))}
+            </CustomTabPanel>
+            <CustomTabPanel>
+              {comments.map((comment) => (
+                <Tweet
+                  key={comment.id}
+                  username={comment.username}
+                  displayName={comment.display_name}
+                  text={comment.content}
+                />
+              ))}
+            </CustomTabPanel>
+          </Tabs>
         </div>
-      </Container>
+        <div style={{ marginLeft: "2rem" }}>
+          <Sidebar />
+        </div>
+      </div>
       <Footer />
     </>
   );
