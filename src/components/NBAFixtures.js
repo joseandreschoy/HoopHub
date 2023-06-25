@@ -15,8 +15,7 @@ const NBAFixtures = () => {
         "https://api-nba-v1.p.rapidapi.com/games/live",
         {
           headers: {
-            "X-RapidAPI-Key":
-              "4fd8381f06msha7f9babc50ff44bp1f9afdjsn56918543bc84",
+            "X-RapidAPI-Key": `${process.env.RAPID_API_KEY}`,
             "X-RapidAPI-Host": "api-nba-v1.p.rapidapi.com",
           },
         }
