@@ -3,31 +3,6 @@ import { Text, Input, Button } from "@nextui-org/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import { styled } from "@nextui-org/react";
-
-const LoginPageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const LoginFormContainer = styled.div`
-  width: 300px;
-  padding: 1rem;
-  text-align: center;
-`;
-
-const CustomText = styled(Text)`
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #1c1e21;
-  text-align: center;
-`;
-
-const CustomButton = styled(Button)`
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-`;
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -65,11 +40,22 @@ const LoginPage = () => {
   return (
     <>
       <Header fullWidth />
-      <LoginPageContainer>
-        <LoginFormContainer>
-          <CustomText h2 weight="bold" marginBottom="2rem">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ width: "300px", padding: "1rem", textAlign: "center" }}>
+          <Text
+            h2
+            weight="bold"
+            marginBottom="2rem"
+            style={{ fontFamily: "Your Font Name" }} // Replace with your desired font
+          >
             {isRegistering ? "Register" : "Login"}
-          </CustomText>
+          </Text>
           <form onSubmit={handleFormSubmit}>
             {isRegistering && (
               <div style={{ marginBottom: "1rem" }}>
@@ -103,22 +89,23 @@ const LoginPage = () => {
                 fullWidth
               />
             </div>
-            <CustomButton
+            <Button
               color="orange"
               auto
               type="submit"
               style={{ width: "100%", marginBottom: "1rem" }}
+              font="body"
             >
-              <CustomText color="white" weight="bold">
+              <Text color="white" weight="bold">
                 {isRegistering ? "Register" : "Login"}
-              </CustomText>
-            </CustomButton>
+              </Text>
+            </Button>
           </form>
-          <CustomText>
+          <Text font="body">
             {isRegistering
               ? "Already have an account?"
               : "Don't have an account yet?"}{" "}
-            <CustomText
+            <Text
               color="primary"
               weight="bold"
               underline
@@ -126,10 +113,10 @@ const LoginPage = () => {
               style={{ cursor: "pointer" }}
             >
               {isRegistering ? "Login" : "Register"}
-            </CustomText>
-          </CustomText>
-        </LoginFormContainer>
-      </LoginPageContainer>
+            </Text>
+          </Text>
+        </div>
+      </div>
     </>
   );
 };
