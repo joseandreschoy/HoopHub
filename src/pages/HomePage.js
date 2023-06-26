@@ -7,12 +7,7 @@ import Sidebar from "../components/Sidebar";
 import NBAFixtures from "../components/NBAFixtures";
 import axios from "axios";
 
-// Example implementation of getUserIdFromAuthToken
-const getUserIdFromAuthToken = (authToken) => {
-  // Parse the authentication token and extract the user ID
-  // Implement the logic specific to your authentication mechanism
-  // Return the user ID
-};
+const getUserIdFromAuthToken = (authToken) => {};
 
 const HomePage = () => {
   const [tweets, setTweets] = useState([]);
