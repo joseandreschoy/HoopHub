@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { SessionContext } from "../context/SessionContext";
 
 export function AuthRoute({ children }) {

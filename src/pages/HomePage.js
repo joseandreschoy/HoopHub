@@ -13,21 +13,10 @@ const HomePage = () => {
   const [tweets, setTweets] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [tweetContent, setTweetContent] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    checkAuthentication();
     fetchTweets();
   }, []);
-
-  const checkAuthentication = () => {
-    const authToken = localStorage.getItem("authToken");
-    if (authToken) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  };
 
   const fetchTweets = async () => {
     try {
@@ -42,29 +31,16 @@ const HomePage = () => {
 
   const createTweet = async () => {
     try {
-      const authToken = localStorage.getItem();
-
-      if (!authToken) {
-        console.log("User is not authenticated. Redirect to login page.");
-        return;
-      }
-
-      const userId = "lol";
-
-      if (!userId) {
-        console.log("Invalid authentication token. Redirect to login page.");
-        return;
-      }
-
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/tweets`,
         {
-          userId,
+          userId: session.user.id,
+          username: session.user.username,
           content: tweetContent,
         },
         {
           headers: {
-            Authorization: `Bearer ${authToken}`,
+            Authorization: `Bearer ${session.token}`,
           },
         }
       );
@@ -85,11 +61,7 @@ const HomePage = () => {
   };
 
   const handlePostButtonClick = () => {
-    if (isAuthenticated) {
-      setShowModal(true);
-    } else {
-      console.log("User is not authenticated. Redirect to login page.");
-    }
+    setShowModal(true);
   };
 
   return (

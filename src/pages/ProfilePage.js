@@ -55,24 +55,10 @@ const CustomTabPanel = styled(TabPanel, {
 const ProfilePage = () => {
   const { id } = useParams();
   const [session] = useContext(SessionContext);
-  const [user, setUser] = useState(null);
   const [tweets, setTweets] = useState([]);
   const [comments, setComments] = useState([]);
 
-  console.log(session);
-
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/users/${id}`
-        );
-        setUser(response.data);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    };
-
     const fetchTweets = async () => {
       try {
         const response = await axios.get(
@@ -95,7 +81,6 @@ const ProfilePage = () => {
       }
     };
 
-    fetchUserProfile();
     fetchTweets();
     fetchComments();
   }, [id]);
@@ -105,22 +90,9 @@ const ProfilePage = () => {
       <Header />
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={{ maxWidth: "600px", width: "100%" }}>
-          {user && (
-            <>
-              <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
-                <CustomText weight="bold">Username:</CustomText>
-                <CustomText>{user.username}</CustomText>
-              </div>
-              <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
-                <CustomText weight="bold">Display Name:</CustomText>
-                <CustomText>{user.display_name}</CustomText>
-              </div>
-              <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
-                <CustomText weight="bold">Bio:</CustomText>
-                <CustomText>{user.bio}</CustomText>
-              </div>
-            </>
-          )}
+          <div style={{ marginTop: "1.25rem", textAlign: "center" }}>
+            <CustomText>{session.user.username}</CustomText>
+          </div>
           <Tabs>
             <CustomTabList>
               <CustomTab>Tweets</CustomTab>
@@ -131,7 +103,6 @@ const ProfilePage = () => {
                 <Tweet
                   key={tweet.id}
                   username={tweet.username}
-                  displayName={tweet.display_name}
                   text={tweet.content}
                 />
               ))}
@@ -141,7 +112,6 @@ const ProfilePage = () => {
                 <Tweet
                   key={comment.id}
                   username={comment.username}
-                  displayName={comment.display_name}
                   text={comment.content}
                 />
               ))}

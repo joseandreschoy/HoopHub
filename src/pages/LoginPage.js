@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import { SessionContext } from "../context/SessionContext";
 
 const LoginPage = () => {
-  const [session, setSession] = useContext(SessionContext);
+  const [_session, setSession] = useContext(SessionContext);
   const navigate = useNavigate();
   const [isRegistering, setIsRegistering] = useState(false);
   const [username, setUsername] = useState("");
@@ -16,13 +16,12 @@ const LoginPage = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      // await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {
-      //   username,
-      //   email,
-      //   password,
-      // });
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {
+        username,
+        email,
+        password,
+      });
 
-      // Registration successful, log in the user
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/login`,
         {
@@ -32,7 +31,7 @@ const LoginPage = () => {
       );
 
       const token = response.data.token;
-      setSession({ token });
+      setSession(response.data);
       // Store the authentication token securely
       localStorage.setItem("authToken", token);
 
