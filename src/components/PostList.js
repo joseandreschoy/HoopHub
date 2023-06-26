@@ -1,21 +1,43 @@
 import React from "react";
-import Tweet from "./Tweet";
+import { Card, Text, Avatar, Col, Row } from "@nextui-org/react";
 
 const PostList = ({ tweets }) => {
-  if (!tweets || tweets.length === 0) {
-    return <div>No tweets to display</div>;
-  }
-
   return (
-    <div>
-      {tweets.map((tweet) => (
-        <Tweet
-          key={tweet.id}
-          username={tweet.username}
-          displayName={tweet.displayName}
-          text={tweet.content}
-        />
-      ))}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        overflowY: "auto",
+      }}
+    >
+      <Col span={6}>
+        {tweets.map((tweet) => (
+          <Card
+            key={tweet.id}
+            shadow
+            style={{
+              marginBottom: "1rem",
+              border: "2px solid orange",
+              borderRadius: "8px",
+              padding: "1rem",
+            }}
+          >
+            <Card.Body>
+              <Row alignItems="center" marginBottom="0.5rem">
+                <Avatar
+                  src={tweet.avatar}
+                  alt={tweet.username}
+                  width="32px"
+                  height="32px"
+                />
+                <Text h6>{tweet.username}</Text>
+              </Row>
+              <Text>{tweet.content}</Text>
+            </Card.Body>
+          </Card>
+        ))}
+      </Col>
     </div>
   );
 };
