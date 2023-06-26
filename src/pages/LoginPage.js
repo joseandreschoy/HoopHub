@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, Input, Button } from "@nextui-org/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import { SessionContext } from "../context/SessionContext";
 
 const LoginPage = () => {
+  const [session, setSession] = useContext(SessionContext);
   const navigate = useNavigate();
   const [isRegistering, setIsRegistering] = useState(false);
   const [username, setUsername] = useState("");
@@ -13,54 +15,31 @@ const LoginPage = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    try {
+      // await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {
+      //   username,
+      //   email,
+      //   password,
+      // });
 
-    if (isRegistering) {
-      try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {
-          username,
+      // Registration successful, log in the user
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/login`,
+        {
           email,
           password,
-        });
+        }
+      );
 
-        // Registration successful, log in the user
-        const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/login`,
-          {
-            email,
-            password,
-          }
-        );
+      const token = response.data.token;
+      setSession({ token });
+      // Store the authentication token securely
+      localStorage.setItem("authToken", token);
 
-        const token = response.data.token;
-
-        // Store the authentication token securely
-        localStorage.setItem("authToken", token);
-
-        // Redirect to the homepage
-        navigate("/");
-      } catch (error) {
-        console.error("Error registering:", error);
-      }
-    } else {
-      try {
-        const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/login`,
-          {
-            email,
-            password,
-          }
-        );
-
-        const token = response.data.token;
-
-        // Store the authentication token securely (e.g., in a browser cookie or local storage)
-        localStorage.setItem("authToken", token);
-
-        // Redirect to the homepage or any other protected route
-        navigate("/");
-      } catch (error) {
-        console.error("Error logging in:", error);
-      }
+      // Redirect to the homepage
+      navigate("/");
+    } catch (error) {
+      console.error("Error registering:", error);
     }
   };
 

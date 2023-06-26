@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, Image, Text, Button } from "@nextui-org/react";
+import { Image, Text, Button } from "@nextui-org/react";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/hoophubimage.png";
 
 const Header = () => {
@@ -16,10 +17,9 @@ const Header = () => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }}>
-        <Link href="/">
+        <NavLink to="/">
           <Image src={Logo} alt="HoopHub Logo" height={50} width={50} />
-          HoopHub
-        </Link>
+        </NavLink>
       </div>
       <div style={{ display: "flex", gap: "0.5rem" }}>
         <Button
@@ -32,11 +32,11 @@ const Header = () => {
           }}
           bordered
         >
-          <Link href="/" color="inherit">
+          <NavLink to="/" color="inherit">
             <Text size="1rem" color="white" weight="bold">
               Home
             </Text>
-          </Link>
+          </NavLink>
         </Button>
         <Button
           color="white"
@@ -48,11 +48,11 @@ const Header = () => {
           }}
           bordered
         >
-          <Link href="/explore" color="inherit">
+          <NavLink to="/explore" color="inherit">
             <Text size="1rem" color="white" weight="bold">
               Explore
             </Text>
-          </Link>
+          </NavLink>
         </Button>
         <Button
           color="white"
@@ -64,11 +64,11 @@ const Header = () => {
           }}
           bordered
         >
-          <Link href="/notifications" color="inherit">
+          <NavLink to="/notifications" color="inherit">
             <Text size="1rem" color="white" weight="bold">
               Notifications
             </Text>
-          </Link>
+          </NavLink>
         </Button>
         <Button
           color="white"
@@ -80,11 +80,11 @@ const Header = () => {
           }}
           bordered
         >
-          <Link href="/messages" color="inherit">
+          <NavLink to="/messages" color="inherit">
             <Text size="1rem" color="white" weight="bold">
               Messages
             </Text>
-          </Link>
+          </NavLink>
         </Button>
         <Button
           color="white"
@@ -96,11 +96,11 @@ const Header = () => {
           }}
           bordered
         >
-          <Link href="/profile" color="inherit">
+          <NavLink to="/profile" color="inherit">
             <Text size="1rem" color="white" weight="bold">
               Profile
             </Text>
-          </Link>
+          </NavLink>
         </Button>
         <Button
           color="white"
@@ -112,11 +112,11 @@ const Header = () => {
           }}
           bordered
         >
-          <Link href="/login" color="inherit">
+          <NavLink to="/login" color="inherit">
             <Text size="1rem" color="white" weight="bold">
               Login
             </Text>
-          </Link>
+          </NavLink>
         </Button>
       </div>
     </div>

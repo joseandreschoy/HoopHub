@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Button, Modal, Input } from "@nextui-org/react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -6,10 +6,10 @@ import PostList from "../components/PostList";
 import Sidebar from "../components/Sidebar";
 import NBAFixtures from "../components/NBAFixtures";
 import axios from "axios";
-
-const getUserIdFromAuthToken = (authToken) => {};
+import { SessionContext } from "../context/SessionContext";
 
 const HomePage = () => {
+  const [session] = useContext(SessionContext);
   const [tweets, setTweets] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [tweetContent, setTweetContent] = useState("");
@@ -42,14 +42,14 @@ const HomePage = () => {
 
   const createTweet = async () => {
     try {
-      const authToken = localStorage.getItem("authToken");
+      const authToken = localStorage.getItem();
 
       if (!authToken) {
         console.log("User is not authenticated. Redirect to login page.");
         return;
       }
 
-      const userId = getUserIdFromAuthToken(authToken);
+      const userId = "lol";
 
       if (!userId) {
         console.log("Invalid authentication token. Redirect to login page.");
@@ -95,7 +95,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <Container style={{ maxWidth: "80%" }}>
+      <Container style={{ maxWidth: "90%" }}>
         <div
           style={{
             display: "flex",
@@ -105,47 +105,44 @@ const HomePage = () => {
         >
           <div
             style={{
-              flex: "0 0 30%",
+              flex: "0 0 20%",
               borderRadius: "10px",
               padding: "1rem",
               backgroundColor: "#fff",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
             }}
           >
             <NBAFixtures />
+            <Button
+              color="error"
+              shadow
+              onClick={handlePostButtonClick}
+              fullWidth
+              style={{ marginTop: "1rem" }}
+            >
+              POST!
+            </Button>
           </div>
           <div
             style={{
-              flex: "0 0 50%",
+              flex: "0 0 60%",
               borderRadius: "10px",
               padding: "1rem",
               backgroundColor: "#fff",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
             }}
           >
             <PostList tweets={tweets} />
           </div>
           <div
             style={{
-              flex: "0 0 20%",
+              flex: "0 0 100%",
               borderRadius: "10px",
               padding: "1rem",
               backgroundColor: "#fff",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
             }}
           >
             <Sidebar />
           </div>
         </div>
-        <Button
-          color="error"
-          shadow
-          onClick={handlePostButtonClick}
-          fullWidth
-          style={{ marginTop: "1rem" }}
-        >
-          POST!
-        </Button>
       </Container>
       <Footer />
 

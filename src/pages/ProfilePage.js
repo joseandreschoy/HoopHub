@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Text, styled } from "@nextui-org/react";
 import axios from "axios";
@@ -8,6 +8,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Sidebar from "../components/Sidebar";
 import Tweet from "../components/Tweet";
+import { SessionContext } from "../context/SessionContext";
 
 const CustomText = styled(Text, {
   fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
@@ -53,9 +54,12 @@ const CustomTabPanel = styled(TabPanel, {
 
 const ProfilePage = () => {
   const { id } = useParams();
+  const [session] = useContext(SessionContext);
   const [user, setUser] = useState(null);
   const [tweets, setTweets] = useState([]);
   const [comments, setComments] = useState([]);
+
+  console.log(session);
 
   useEffect(() => {
     const fetchUserProfile = async () => {

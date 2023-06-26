@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text } from "@nextui-org/react";
+import { Text, Card, Avatar, Col, Row } from "@nextui-org/react";
 import axios from "axios";
 
 const NBAFixtures = () => {
@@ -34,14 +34,45 @@ const NBAFixtures = () => {
       {fixtures.length === 0 ? (
         <Text>No live games</Text>
       ) : (
-        fixtures.map((fixture) => (
-          <div key={fixture.gameId}>
-            <Text>{fixture.startTimeUTC}</Text>
-            <Text>
-              {fixture.vTeam.fullName} vs {fixture.hTeam.fullName}
-            </Text>
-          </div>
-        ))
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            overflowY: "auto",
+          }}
+        >
+          <Col span={6}>
+            {fixtures.map((fixture) => (
+              <Card
+                key={fixture.gameId}
+                shadow
+                style={{
+                  marginBottom: "1rem",
+                  border: "2px solid orange",
+                  borderRadius: "8px",
+                  padding: "1rem",
+                }}
+              >
+                <Card.Body>
+                  <Row alignItems="center" marginBottom="0.5rem">
+                    <Avatar
+                      src={fixture.avatar}
+                      alt={fixture.username}
+                      width="32px"
+                      height="32px"
+                    />
+                    <Text h6>
+                      {fixture.vTeam.fullName} vs {fixture.hTeam.fullName}
+                    </Text>
+                  </Row>
+                  <Text>{fixture.startTimeUTC}</Text>
+                </Card.Body>
+              </Card>
+            ))}
+          </Col>
+        </div>
       )}
     </div>
   );
