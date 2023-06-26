@@ -1,71 +1,30 @@
-# Getting Started with Create React App
+HoopHub
+A web application for basketball lovers to engage with each other around the latest news in basketball!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The application at present only allows you to post - the code for commenting has not yet been finalised. Furthermore, although working before, I seem to have broken the code for login, which after registering should immediately take you to home so you can post as desired. Sometimes it functions, sometimes it doesn't. The same applies for the login section.
 
-## Available Scripts
+There is no content as of yet in explore, messaging and notifications, they will soon be implemented, along with other stylistic features.
 
-In the project directory, you can run:
+Lessons Learned
+I had an issue building out the components as I could not parse the logged in users. I found a function called useContext which allowed me to pass state throughout my application based on the logged in users session, and managed to pass that through so that the user would be able to post.
 
-### `npm start`
+I used NextUI for this project which I had never used before, so it took some adjusting from having SCSS files for styling to directly imported it into the jsx. It did make some things easier, as I it was technically easier to style components directly in the javascript, but made some components quite messy. I suppose there is a caveat with this in terms of would I rather have had an easier styling path or better readability? I have had a lot of fun creating this application, and will continue to polish and work on this - hopefully once I have fixed login and authentication, I can move onto a messaging feature between users in the application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Run Locally
+Clone the project
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  git clone https://link-to-project
+Go to the project directory
 
-### `npm test`
+  cd my-project
+Install dependencies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  npm install
+Start the server
 
-### `npm run build`
+  npm run start
+#RAPID API
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To generate a key for the external API visit - https://rapidapi.com/api-sports/api/api-nba/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# HoopHub
+Remember to put the key in the .env file.
