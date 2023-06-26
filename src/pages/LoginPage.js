@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleFormSubmit = async (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {
@@ -42,6 +42,29 @@ const LoginPage = () => {
     }
   };
 
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/login`,
+        {
+          email,
+          password,
+        }
+      );
+
+      const token = response.data.token;
+      setSession(response.data);
+      // Store the authentication token securely
+      localStorage.setItem("authToken", token);
+
+      // Redirect to the homepage
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
+
   return (
     <>
       <Header fullWidth />
@@ -63,7 +86,9 @@ const LoginPage = () => {
           >
             {isRegistering ? "Register" : "Login"}
           </Text>
-          <form onSubmit={handleFormSubmit}>
+          <form
+            onSubmit={isRegistering ? handleLoginSubmit : handleRegisterSubmit}
+          >
             {isRegistering && (
               <div style={{ marginBottom: "1rem" }}>
                 <Input
