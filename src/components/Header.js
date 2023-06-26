@@ -18,6 +18,7 @@ const Header = () => {
       <div style={{ display: "flex", alignItems: "center" }}>
         <Link href="/">
           <Image src={Logo} alt="HoopHub Logo" height={50} width={50} />
+          HoopHub
         </Link>
       </div>
       <div style={{ display: "flex", gap: "0.5rem" }}>

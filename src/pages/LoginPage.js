@@ -33,10 +33,10 @@ const LoginPage = () => {
 
         const token = response.data.token;
 
-        // Store the authentication token securely (e.g., in a browser cookie or local storage)
+        // Store the authentication token securely
         localStorage.setItem("authToken", token);
 
-        // Redirect to the homepage or any other protected route
+        // Redirect to the homepage
         navigate("/");
       } catch (error) {
         console.error("Error registering:", error);

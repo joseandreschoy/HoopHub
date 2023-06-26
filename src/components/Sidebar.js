@@ -7,7 +7,7 @@ const sidebarStyles = {
     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     border: "0.125rem solid orange",
     padding: "1.5rem",
-    width: "18rem",
+    width: "12rem",
     borderRadius: "1rem",
   },
   trendTitle: {
