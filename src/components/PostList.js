@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Text, Avatar, Col, Row } from "@nextui-org/react";
+import Tweet from "./Tweet";
 
 const PostList = ({ tweets }) => {
   return (
@@ -14,29 +15,7 @@ const PostList = ({ tweets }) => {
     >
       <Col span={6}>
         {tweets.map((tweet) => (
-          <Card
-            key={tweet.id}
-            shadow
-            style={{
-              marginBottom: "1rem",
-              border: "2px solid orange",
-              borderRadius: "8px",
-              padding: "1rem",
-            }}
-          >
-            <Card.Body>
-              <Row alignItems="center" marginBottom="0.5rem">
-                <Avatar
-                  src={tweet.avatar}
-                  alt={tweet.username}
-                  width="32px"
-                  height="32px"
-                />
-                <Text h6>{tweet.username}</Text>
-              </Row>
-              <Text>{tweet.content}</Text>
-            </Card.Body>
-          </Card>
+          <Tweet tweet={tweet} />
         ))}
       </Col>
     </div>
@@ -44,3 +23,27 @@ const PostList = ({ tweets }) => {
 };
 
 export default PostList;
+
+// <Card
+//             key={tweet.id}
+//             shadow
+//             style={{
+//               marginBottom: "1rem",
+//               border: "2px solid orange",
+//               borderRadius: "8px",
+//               padding: "1rem",
+//             }}
+//           >
+//             <Card.Body>
+//               <Row alignItems="center" marginBottom="0.5rem">
+//                 <Avatar
+//                   src={tweet.avatar}
+//                   alt={tweet.username}
+//                   width="32px"
+//                   height="32px"
+//                 />
+//                 <Text h6>{tweet.username}</Text>
+//               </Row>
+//               <Text>{tweet.content}</Text>
+//             </Card.Body>
+//           </Card>

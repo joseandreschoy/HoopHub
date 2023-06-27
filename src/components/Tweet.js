@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Text } from "@nextui-org/react";
+import { Avatar, Text, Button } from "@nextui-org/react";
 import axios from "axios";
 
 const tweetStyles = {
@@ -35,21 +35,16 @@ const tweetStyles = {
   },
 };
 
-const Tweet = ({ username, displayName, text, tweetId }) => {
+const Tweet = ({ tweet }) => {
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleGetComments = async () => {
-    if (comments.length > 0) {
-      setShowComments(!showComments);
-      return;
-    }
-
+  const handleShowComments = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/tweets/${tweetId}/comments`
+        `${process.env.REACT_APP_API_URL}/api/tweets/${tweet.id}/comments`
       );
       setComments(response.data);
       setShowComments(true);
@@ -58,6 +53,10 @@ const Tweet = ({ username, displayName, text, tweetId }) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleHideComments = () => {
+    setShowComments(false);
   };
 
   return (
@@ -69,20 +68,26 @@ const Tweet = ({ username, displayName, text, tweetId }) => {
         style={tweetStyles.avatar}
       />
       <div style={{ marginLeft: "1rem" }}>
-        <Text style={tweetStyles.displayName}>{displayName}</Text>
-        <Text style={tweetStyles.username}>@{username}</Text>
+        <Text style={tweetStyles.displayName}>{tweet.displayName}</Text>
+        <Text style={tweetStyles.username}>@{tweet.username}</Text>
         <Text font="body" style={tweetStyles.text}>
-          {text}
+          {tweet.content}
         </Text>
-        <button style={tweetStyles.button} onClick={handleGetComments}>
-          {showComments ? "Hide Comments" : "Show Comments"}
-        </button>
+        {showComments ? (
+          <Button style={tweetStyles.button} onClick={handleHideComments}>
+            Hide comments
+          </Button>
+        ) : (
+          <Button style={tweetStyles.button} onClick={handleShowComments}>
+            Show comments
+          </Button>
+        )}
         {isLoading && <Text>Loading comments...</Text>}
         {showComments &&
           comments.map((comment) => (
             <div key={comment.id}>
-              <Text>{comment.content}</Text>
               <Text>@{comment.username}</Text>
+              <Text>{comment.content}</Text>
             </div>
           ))}
       </div>

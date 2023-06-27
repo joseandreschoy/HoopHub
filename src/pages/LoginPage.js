@@ -87,7 +87,7 @@ const LoginPage = () => {
             {isRegistering ? "Register" : "Login"}
           </Text>
           <form
-            onSubmit={isRegistering ? handleLoginSubmit : handleRegisterSubmit}
+            onSubmit={isRegistering ? handleRegisterSubmit : handleLoginSubmit}
           >
             {isRegistering && (
               <div style={{ marginBottom: "1rem" }}>
